@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
+	_ "embed"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,6 +12,9 @@ import (
 	"time"
 )
 
+//go:embed index.html
+var indexHTML []byte
+
 type Reservation struct {
 	BookingID   string  `json:"booking_id"`
 	GuestName   string  `json:"guest_name"`
@@ -19,6 +22,12 @@ type Reservation struct {
 	Nights      int     `json:"nights"`
 	TotalAmount float64 `json:"total_amount"`
 	Status      string  `json:"status"`
+}
+
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.WriteHeader(http.StatusOK)
+	w.Write(indexHTML)
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
@@ -61,6 +70,7 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
+	mux.HandleFunc("/", rootHandler)
 	mux.HandleFunc("/healthz", healthHandler)
 	mux.HandleFunc("/readyz", healthHandler)
 	mux.HandleFunc("/api/v1/reservations", reservationsHandler)
@@ -73,7 +83,7 @@ func main() {
 	}
 
 	go func() {
-		log.Printf("⚡ Luxe 5-Star Hotel Booking Engine starting on port %s...", port)
+		log.Printf("👑 The Grand Bhawesh Palace Luxury Hotel Engine running on http://localhost:%s", port)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("Server failed: %v", err)
 		}

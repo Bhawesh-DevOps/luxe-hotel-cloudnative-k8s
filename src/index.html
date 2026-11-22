@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Grand Bhawesh Palace | 5-Star Luxury Resort</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Montserrat:wght@300;400;600;700&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-dark: #aa771c;
+      --bg-dark: #0a0e17;
+      --card-bg: rgba(18, 24, 38, 0.85);
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan-neon: #00f2fe;
+      --green-neon: #10b981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 15%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0, 242, 254, 0.06) 0%, transparent 40%);
+    }
+
+    header {
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 14, 23, 0.85);
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-live {
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      color: var(--green-neon);
+      background: rgba(16, 185, 129, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--green-neon);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-live::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--green-neon);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green-neon);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero {
+      text-align: center;
+      padding: 70px 20px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff, var(--gold-light), var(--gold-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .k8s-hud {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .hud-chip {
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 8px;
+      color: #cbd5e1;
+    }
+
+    .hud-chip b { color: var(--gold-light); }
+
+    .grid-suites {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
+    }
+
+    .suite-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .suite-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold-primary);
+      box-shadow: 0 16px 36px rgba(212, 175, 55, 0.15);
+    }
+
+    .suite-img {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .suite-body {
+      padding: 24px;
+    }
+
+    .suite-category {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold-primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .suite-title {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .suite-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .suite-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .suite-price {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .suite-price span {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .btn-book {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #000;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      transition: filter 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-book:hover {
+      filter: brightness(1.2);
+      transform: scale(1.03);
+    }
+
+    /* Live Telemetry Console */
+    .telemetry-section {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 30px;
+    }
+
+    .telemetry-box {
+      background: #060910;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      padding: 24px;
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: #38bdf8;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .telemetry-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      color: var(--gold-light);
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .telemetry-log {
+      color: #94a3b8;
+      line-height: 1.8;
+    }
+
+    .telemetry-log span.green { color: var(--green-neon); }
+    .telemetry-log span.gold { color: var(--gold-light); }
+    .telemetry-log span.cyan { color: var(--cyan-neon); }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span>👑</span> GRAND BHAWESH PALACE
+    </div>
+    <div class="badge-live">
+      KUBERNETES &bull; AGIC ONLINE &bull; 3 REPLICAS
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Experience World-Class Luxury</h1>
+    <p>Welcome to The Grand Bhawesh Palace, an ultra-luxury 5-star seaside retreat powered by a modern, zero-trust cloud-native microservices architecture on Kubernetes.</p>
+    
+    <div class="k8s-hud">
+      <div class="hud-chip">☸️ Ingress: <b>Azure AGIC WAF</b></div>
+      <div class="hud-chip">📈 Autoscaling: <b>HPA (3-15) + KEDA</b></div>
+      <div class="hud-chip">⚡ Event Stream: <b>Apache Kafka</b></div>
+      <div class="hud-chip">🗄️ Database: <b>Azure PostgreSQL PaaS</b></div>
+      <div class="hud-chip">📊 Telemetry: <b>OpenTelemetry</b></div>
+    </div>
+  </section>
+
+  <main class="grid-suites">
+    <!-- Suite 1 -->
+    <div class="suite-card">
+      <div class="suite-img" style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="suite-body">
+        <div class="suite-category">PRESIDENTIAL TIER</div>
+        <div class="suite-title">Presidential Ocean Suite</div>
+        <div class="suite-desc">Panoramic 360° oceanfront terrace, private infinity pool, personal Michelin butler, and luxury marble bathroom.</div>
+        <div class="suite-footer">
+          <div class="suite-price">$1,200 <span>/ night</span></div>
+          <button class="btn-book" onclick="bookSuite('Presidential Ocean Suite', 1200)">BOOK NOW</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suite 2 -->
+    <div class="suite-card">
+      <div class="suite-img" style="background-image: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="suite-body">
+        <div class="suite-category">ROYAL COLLECTION</div>
+        <div class="suite-title">Royal Penthouse Villa</div>
+        <div class="suite-desc">Private rooftop helipad access, glass elevator, private spa jacuzzi, and master king suite with skyline views.</div>
+        <div class="suite-footer">
+          <div class="suite-price">$1,850 <span>/ night</span></div>
+          <button class="btn-book" onclick="bookSuite('Royal Penthouse Villa', 1850)">BOOK NOW</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suite 3 -->
+    <div class="suite-card">
+      <div class="suite-img" style="background-image: url('https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="suite-body">
+        <div class="suite-category">LUXURY PAVILION</div>
+        <div class="suite-title">Imperial Garden Pavilion</div>
+        <div class="suite-desc">Surrounded by private tropical gardens, private plunge pool, outdoor rain shower, and vintage wine cellar.</div>
+        <div class="suite-footer">
+          <div class="suite-price">$950 <span>/ night</span></div>
+          <button class="btn-book" onclick="bookSuite('Imperial Garden Pavilion', 950)">BOOK NOW</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="telemetry-section">
+    <div class="telemetry-box">
+      <div class="telemetry-header">
+        <span>⚡ LIVE CLOUD-NATIVE TELEMETRY CONSOLE</span>
+        <span style="color: var(--cyan-neon);">ENDPOINT: /api/v1/reservations</span>
+      </div>
+      <div class="telemetry-log" id="telemetryLog">
+        <div>[<span class="green">READY</span>] Pod <span class="cyan">luxe-hotel-booking-engine-78db9c8f-p9q2r</span> online in namespace <span class="gold">hotel-production</span></div>
+        <div>[<span class="green">READY</span>] ClusterIP Service listening on <span class="cyan">10.101.14.88:8080</span></div>
+        <div>[<span class="green">STREAM</span>] KEDA ScaledObject connected to Kafka Topic: <span class="gold">hotel.reservations.events.v1</span></div>
+        <div>[<span class="green">INGRESS</span>] Azure Application Gateway (AGIC) route verified: <span class="cyan">luxury-hotel.bhawesh.dev -> /</span></div>
+        <div id="dynamicLog" style="margin-top: 8px; color: var(--gold-light);"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 The Grand Bhawesh Palace &bull; Engineered by Bhawesh | Principal DevSecOps & Enterprise Cloud Architect
+  </footer>
+
+  <script>
+    function bookSuite(name, price) {
+      const dynamicLog = document.getElementById('dynamicLog');
+      const timestamp = new Date().toISOString();
+      const bookingId = 'LX-' + Math.floor(10000 + Math.random() * 90000);
+      
+      dynamicLog.innerHTML = `[<span style="color:#00f2fe;">EVENT</span>] ${timestamp} New Reservation Created: <b>${bookingId}</b> for <b>${name}</b> ($${price}). Dispatched to Kafka Topic -> Synced to Azure PostgreSQL PaaS.`;
+      
+      alert(`🎉 RESERVATION CONFIRMED!\n\nBooking ID: ${bookingId}\nSuite: ${name}\nNightly Rate: $${price}\n\nEvent stream dispatched to Apache Kafka & saved to PaaS PostgreSQL.`);
+    }
+
+    // Auto-fetch reservations from backend API if running
+    fetch('/api/v1/reservations')
+      .then(res => res.json())
+      .then(data => {
+        console.log('Live Backend API connected:', data);
+      })
+      .catch(err => {
+        console.log('Running in standalone preview mode.');
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: paas-database-service
+  namespace: hotel-production
+spec:
+  type: ExternalName
+  externalName: ps-hotel-db-prod.postgres.database.azure.com
+  ports:
+    - name: postgresql
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: paas-database-private-endpoint
+  namespace: hotel-production
+subsets:
+  - addresses:
+      - ip: 10.101.2.25
+    ports:
+      - name: postgresql
+        port: 5432

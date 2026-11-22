@@ -1,0 +1,22 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: kafka-reservation-consumer-scaler
+  namespace: hotel-production
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: luxe-hotel-ingestion-worker
+  minReplicaCount: 2
+  maxReplicaCount: 25
+  cooldownPeriod: 60
+  pollingInterval: 15
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: "hotel-kafka-bootstrap.kafka.svc.cluster.local:9092"
+        consumerGroup: "hotel-booking-stream-processor"
+        topic: "hotel.reservations.events.v1"
+        lagThreshold: "50"
+        offsetResetPolicy: "latest"
